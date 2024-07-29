@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minutario 2024 -2025 </title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Minutario 2024 -2025</h1>
+    <form id="registroForm">
+      <div class="form-group">
+        <label for="folio"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/publicacion.png" alt="Folio"> Número de Folio:</label>
+        <input type="text" id="folio" name="folio" readonly>
+      </div>
+      <div class="form-group">
+        <label for="fechaEmision"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/calendario.png" alt="Fecha"> Fecha de Emisión:</label>
+        <input type="date" id="fechaEmision" name="fechaEmision" required>
+      </div>
+      <div class="form-group">
+        <label for="fechaRecepcion"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/calendario.png" alt="Fecha"> Fecha de Recepción:</label>
+        <input type="date" id="fechaRecepcion" name="fechaRecepcion" required>
+      </div>
+      <div class="form-group">
+        <label for="numOficio"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/publicacion.png" alt="Oficio"> Número de Oficio:</label>
+        <input type="text" id="numOficio" name="numOficio" required>
+      </div>
+      <div class="form-group">
+        <label for="nombreSuscribe"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/usuario.png" alt="Nombre"> Nombre de la Persona que Suscribe:</label>
+        <input type="text" id="nombreSuscribe" name="nombreSuscribe" required>
+      </div>
+      <div class="form-group">
+        <label for="dependenciaDestinataria"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/edificio.png" alt="Dependencia"> Dependencia Destinataria:</label>
+        <input type="text" id="dependenciaDestinataria" name="dependenciaDestinataria" required>
+      </div>
+      <div class="form-group">
+        <label for="asunto"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/cc.png" alt="Asunto"> Asunto:</label>
+        <input type="text" id="asunto" name="asunto" required>
+      </div>
+      <div class="form-group">
+        <label for="responsable"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/tareas.png" alt="Responsable"> Responsable:</label>
+        <select id="responsable" name="responsable" required>
+          <option value="responsable1">Responsable 1</option>
+          <option value="responsable2">Responsable 2</option>
+          <!-- Añadir más responsables según sea necesario -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="estatus"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/semaforo.png" alt="Estatus"> Estatus:</label>
+        <select id="estatus" name="estatus" required>
+          <option value="ATENDIDO">ATENDIDO</option>
+          <option value="PENDIENTE">PENDIENTE</option>
+          <option value="VENCIDO">VENCIDO</option>
+          <option value="N/P">N/P</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="documentoDigital"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/pdf-1.png" alt="PDF"> Consultar Documento Digital:</label>
+        <input type="url" id="documentoDigital" name="documentoDigital" placeholder="URL del documento PDF" required>
+      </div>
+      <div class="buttons">
+        <button type="button" id="nuevoBtn"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/registro.png" alt="Nuevo"> Nuevo</button>
+        <button type="button" id="guardarBtn"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/guardar.png" alt="Guardar"> Guardar</button>
+        <button type="button" id="generarReporteBtn"><img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/sobresalir.png" alt="Reporte"> Generar Reporte</button>
+      </div>
+    </form>
+    <div id="resultados">
+      <h2>Resultados</h2>
+      <div class="buscar-container">
+        <input type="text" id="buscar" placeholder="Buscar por fecha de recepción, número de oficio, nombre, dependencia o responsable">
+        <img src="https://portal-transparencia.funcionpublica.gob.mx/wp-content/uploads/2024/07/busqueda.png" alt="Buscar" class="buscar-icono">
+      </div>
+      <div id="contador"></div>
+      <table id="resultadosTabla">
+        <thead>
+          <tr>
+            <th>Folio</th>
+            <th>Fecha de Emisión</th>
+            <th>Fecha de Recepción</th>
+            <th>Número de Oficio</th>
+            <th>Nombre</th>
+            <th>Dependencia</th>
+            <th>Asunto</th>
+            <th>Responsable</th>
+            <th>Estatus</th>
+            <th>Documento</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div id="paginacion"></div>
+    </div>
+    <div id="loading" style="display: none;">Generando reporte...</div>
+    <div id="mensaje" style="display: none;">Se ha realizado tu reporte</div>
+    <div id="mensajeGuardado" style="display: none;">Se ha guardado el registro</div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
